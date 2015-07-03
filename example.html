@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="utf-8">
+	<title>CustomEase for Greensock</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body class="b-page">
+	<header class="header">
+		<h1 class="header__heading heading heading_lvl_1">CustomEase plugin for <a href="http://greensock.com" target="_blank">Greensock</a></h1>
+	</header>
+	<section class="content">
+		<form class="ease">
+			<label>Ease data: <input class="ease__data" id="ease__data" type="text" value="[{s:0,cp:-0.014,e:0.232},{s:0.232,cp:0.478,e:0.984},{s:0.984,cp:1.49,e:0.996},{s:0.996,cp:0.502,e:1}]"></label>
+			<button class="ease__apply" id="ease__apply" onclick="apply(document.querySelector('#ease__data').value); return false;">Apply</button>
+		</form>
+		<code class="code" id="code">
+CustomEase.create('test', [{s:0,cp:-0.014,e:0.232},{s:0.232,cp:0.478,e:0.984},{s:0.984,cp:1.49,e:0.996},{s:0.996,cp:0.502,e:1}]);
+
+TweenMax.to(document.getElementById('divy'), 2, { x: 400, ease: CustomEase.byName('test') });
+		</code>
+	</section>
+	<div>
+		<div class="divy" id="divy" style=""></div>
+	</div>
+	<section class="usage">
+		<h2 class="heading heading_lvl_2">How to use?</h2>
+		<ol class="instruction">
+			<li class="instruction__step">Connect CustomEase plugin. <code class="code">&lt;script src="customease.js"&gt;&lt;/script&gt;</code></li>
+			<li class="instruction__step">Go to the <a href="http://greensock.com/customease">Greensock`s custom ease builder for ActionScript</a> and copy array as shown on the screenshot below.</li>
+			<li class="instruction__step">Paste it on this page.</li>
+			<li class="instruction__step">Copy your code.</li>
+			<li class="instruction__step">Enjoy!</li>
+		<br>
+		<br>
+		<img src="image.png">
+	</section>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenMax.min.js"></script>
+	<script src="customease.js"></script>
+	<script>
+		var tween;
+		function isValid(data){
+			return /^\[(\{((s|cp|e)\:[0-9\-\.]+\,?){3}\}\,?)+\]$/.test(data);
+		}
+
+		function apply(data){
+			if(isValid(data)){
+				CustomEase.create('test', eval(data));
+				tween.updateTo({ ease: CustomEase.byName('test') });
+				tween.restart();
+				document.querySelector('#code').innerHTML = '\nCustomEase.create(\'test\', ' + data + ');\n\n' +
+				'TweenMax.to(document.getElementById(\'divy\'), 2, { x: 400, ease: CustomEase.byName(\'test\') });';
+			}else throw Error('Wrong ease data');
+		}
+
+		CustomEase.create('test', [{s:0,cp:-0.014,e:0.232},{s:0.232,cp:0.478,e:0.984},{s:0.984,cp:1.49,e:0.996},{s:0.996,cp:0.502,e:1}]);
+
+		window.onload = function(){
+			tween = TweenMax.to(document.getElementById('divy'), 2, { x: 400, ease: CustomEase.byName('test') });
+		};
+	</script>
+</body>
+</html>
