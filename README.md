@@ -15,6 +15,6 @@ TweenMax.to(document.getElementById('divy'), 2, { x: 400, ease: CustomEase.byNam
 ## What is the strange awkward second argument?
 That is ease data. You can get it visiting [Greensock`s custom eases builder fo ActionScript](http://greensock.com/customease) and copying array as shown on the screenshot below.
 
-![instruction](//raw.githubusercontent.com/frux/gsap-customease/gh-pages/image.png "")
+![instruction](https://raw.githubusercontent.com/frux/gsap-customease/gh-pages/image.png "")
 
 Also you can use [helper](http://frux.github.io/gsap-customease).
