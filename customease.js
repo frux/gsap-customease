@@ -21,6 +21,10 @@ var CustomEase = (function(){
 
             return curves[curveIndex](curveProgress);
         };
+
+        easings[name].getRatio = function(t){
+            return easings[name](t);
+        };
     }
 
     function byName(name){
